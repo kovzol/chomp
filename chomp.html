@@ -23,13 +23,14 @@
   for (j=1; j<=Zeilen; ++j) {
     var line = document.createElement("tr");
     for (i=1; i<=Spalten; ++i) {
-      var column1 = document.createElement("td");
-      column1.style.cssText = "padding:3px; background-color:#993300";
-      var img1 = document.createElement("img");
-      img1.src = "c.png";
-      column1.appendChild(img1);
+      var column = document.createElement("td");
+      column.style.cssText = "padding:3px; background-color:#993300";
+      column.id = "S-" + j + "-" + i;
+      var img = document.createElement("img");
+      img.src = "c.png";
+      column.appendChild(img);
       // Eine Spalte wird zur aktuellen Zeile hinzugefügt:
-      line.appendChild(column1);
+      line.appendChild(column);
     }
     // Die aktuelle Zeile wird zur virtuellen Tabelle hinzugefügt:
     table.appendChild(line);
