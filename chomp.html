@@ -16,15 +16,23 @@
       for (var i=s; i<=Spalten; ++i) {
         var Stueck = document.getElementById("S-"+j+"-"+i);
         Stueck.style.cssText += "opacity: 0.5;";
-        Stueck.removeAttribute('onclick');
+        Stueck.removeAttribute('onclick'); // Dieses Stück ist nicht mehr klickbar!
       }
+
     // Wir aktualisieren die Info über den aktuellen Spieler:
-    for (var s=0; s<=1; ++s) {
-      var d = document.getElementById("d" + s);
-      d.hidden = (aktueller_Spieler != s);
+    for (var i=0; i<=1; ++i) {
+      var d = document.getElementById("d" + i);
+      d.hidden = (aktueller_Spieler == i);
     }
+
     // Nun ist der andere Spieler dran:
     aktueller_Spieler = 1 - aktueller_Spieler;
+
+    if (z==1 && s==1) { // Gewinn!
+      var d = document.getElementById("d" + aktueller_Spieler);
+      d.innerHTML = Namen[aktueller_Spieler] + " hat gewonnen!"
+    }
+
   }
 
   // Angabe der Größe der Schokolade
@@ -46,7 +54,10 @@
     var line = document.createElement("tr");
     for (var i=1; i<=Spalten; ++i) {
       var column = document.createElement("td");
-      column.style.cssText = "padding:3px; background-color:#993300";
+      var Farbe = "993300";
+      if (j == 1 && i == 1)
+        Farbe = "006758"; // vergiftetes Stück!
+      column.style.cssText = "padding:3px; background-color:#" + Farbe;
       column.id = "S-" + j + "-" + i; // Eine ID ist der Form "S-2-3" wobei 2 die Zeile, 3 die Spalte ist.
       column.setAttribute('onclick', "Zug(" + j + "," + i + ")");
       var img = document.createElement("img");
@@ -62,10 +73,10 @@
   t.appendChild(table);
 
   // Initialisierung der Spielinformationen:
-  for (var s=0; s<=1; ++s) {
-    var d = document.getElementById("d" + s);
-    d.innerHTML = Namen[s] + " ist dran."
-    d.hidden = (aktueller_Spieler = s);
+  for (var i=0; i<=1; ++i) {
+    var d = document.getElementById("d" + i);
+    d.innerHTML = Namen[i] + " ist dran."
+    d.hidden = (aktueller_Spieler != i);
   }
 
 </script>
