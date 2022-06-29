@@ -1,6 +1,9 @@
 <html>
 
-<div id="t"></div>
+<div id="t" style="margin: auto; width: 50%;
+ position: absolute; top: 50%; left: 50%; -moz-transform: translateX(-50%) translateY(-50%);
+ -webkit-transform: translateX(-50%) translateY(-50%);
+ transform: translateX(-50%) translateY(-50%);"></div>
 
 <script>
   var t = document.getElementById("t");
@@ -21,7 +24,7 @@
       img1.src = "c.png";
       column1.appendChild(img1);
       line.appendChild(column1);
-  }
+    }
 
   table.appendChild(line);
 
