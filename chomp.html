@@ -3,22 +3,34 @@
 <div id="t" style="margin: auto; width: 50%;
  position: absolute; top: 50%; left: 50%; -moz-transform: translateX(-50%) translateY(-50%);
  -webkit-transform: translateX(-50%) translateY(-50%);
- transform: translateX(-50%) translateY(-50%);"></div>
+ transform: translateX(-50%) translateY(-50%);">
+  <div id="d0"></div>
+  <div id="d1"></div>
+</div>
 
 <script>
 
-  function verstecke(z, s) {
+  // Der aktuelle Spieler zieht (z, s):
+  function Zug(z, s) {
     for (var j=z; j<=Zeilen; ++j)
       for (var i=s; i<=Spalten; ++i) {
         var Stueck = document.getElementById("S-"+j+"-"+i);
         Stueck.style.cssText += "opacity: 0.5;";
       }
-
+    // Wir aktualisieren die Info über den aktuellen Spieler:
+    for (var s=0; s<=1; ++s) {
+      var d = document.getElementById("d" + s);
+      d.hidden = (aktueller_Spieler != s);
+    }
+    // Nun ist der andere Spieler dran:
+    aktueller_Spieler = 1 - aktueller_Spieler;
   }
 
   // Angabe der Größe der Schokolade
   Zeilen = 3;
   Spalten = 6;
+  Namen = ['Johnny', 'Jimmy'];
+  aktueller_Spieler = 0;
 
   // Die Tabelle wird in div id="t" erstellt werden:
   var t = document.getElementById("t");
@@ -35,7 +47,7 @@
       var column = document.createElement("td");
       column.style.cssText = "padding:3px; background-color:#993300";
       column.id = "S-" + j + "-" + i; // Eine ID ist der Form "S-2-3" wobei 2 die Zeile, 3 die Spalte ist.
-      column.setAttribute('onclick', "verstecke(" + j + "," + i + ")");
+      column.setAttribute('onclick', "Zug(" + j + "," + i + ")");
       var img = document.createElement("img");
       img.src = "c.png";
       column.appendChild(img);
@@ -47,6 +59,13 @@
   }
   // Die virtuelle Tabelle wird zum Dokument hinzugefügt:
   t.appendChild(table);
+
+  // Initialisierung der Spielinformationen:
+  for (var s=0; s<=1; ++s) {
+    var d = document.getElementById("d" + s);
+    d.innerHTML = Namen[s] + " ist dran."
+    d.hidden = (aktueller_Spieler = s);
+  }
 
 </script>
 
