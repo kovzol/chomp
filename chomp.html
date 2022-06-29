@@ -6,29 +6,35 @@
  transform: translateX(-50%) translateY(-50%);"></div>
 
 <script>
-  var t = document.getElementById("t");
-  t.innerHTML = "";
 
+  // Angabe der Größe der Schokolade
+  Zeilen = 3;
+  Spalten = 6;
+
+  // Die Tabelle wird in div id="t" erstellt werden:
+  var t = document.getElementById("t");
+
+  // Wir konstruieren die Tabelle (noch virtuell):
   const table = document.createElement("table");
   table.style.cssText = "border:1px solid black; padding:3px";
   table.rules = "all";
 
-  
-  for (j=1; j<=3; ++j) {
+  // Erstellen der Zeilen und Spalten:
+  for (j=1; j<=Zeilen; ++j) {
     var line = document.createElement("tr");
-
-    for (i=1; i<=6; ++i) {
+    for (i=1; i<=Spalten; ++i) {
       var column1 = document.createElement("td");
       column1.style.cssText = "padding:3px; background-color:#993300";
       var img1 = document.createElement("img");
       img1.src = "c.png";
       column1.appendChild(img1);
+      // Eine Spalte wird zur aktuellen Zeile hinzugefügt:
       line.appendChild(column1);
     }
-
-  table.appendChild(line);
-
+    // Die aktuelle Zeile wird zur virtuellen Tabelle hinzugefügt:
+    table.appendChild(line);
   }
+  // Die virtuelle Tabelle wird zum Dokument hinzugefügt:
   t.appendChild(table);
 
 </script>
