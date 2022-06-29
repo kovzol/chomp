@@ -7,6 +7,15 @@
 
 <script>
 
+  function verstecke(z, s) {
+    for (var j=z; j<=Zeilen; ++j)
+      for (var i=s; i<=Spalten; ++i) {
+        var Stueck = document.getElementById("S-"+j+"-"+i);
+        Stueck.style.cssText += "opacity: 0.5;";
+      }
+
+  }
+
   // Angabe der Größe der Schokolade
   Zeilen = 3;
   Spalten = 6;
@@ -20,12 +29,13 @@
   table.rules = "all";
 
   // Erstellen der Zeilen und Spalten:
-  for (j=1; j<=Zeilen; ++j) {
+  for (var j=1; j<=Zeilen; ++j) {
     var line = document.createElement("tr");
-    for (i=1; i<=Spalten; ++i) {
+    for (var i=1; i<=Spalten; ++i) {
       var column = document.createElement("td");
       column.style.cssText = "padding:3px; background-color:#993300";
-      column.id = "S-" + j + "-" + i;
+      column.id = "S-" + j + "-" + i; // Eine ID ist der Form "S-2-3" wobei 2 die Zeile, 3 die Spalte ist.
+      column.setAttribute('onclick', "verstecke(" + j + "," + i + ")");
       var img = document.createElement("img");
       img.src = "c.png";
       column.appendChild(img);
